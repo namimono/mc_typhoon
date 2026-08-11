@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement All Tickets"
+  short_description: "Implement dependent tickets with sequential subagents"
+  default_prompt: "Use $implement-all-ticket to execute all ready-for-agent tickets in dependency order."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ES Curl Query Only"
+  short_description: "Use curl to query Elasticsearch with read-only safeguards."
+  default_prompt: "Use curl in read-only mode to query Elasticsearch. Refuse any write, update, delete, reindex, bulk, or settings modification request."
