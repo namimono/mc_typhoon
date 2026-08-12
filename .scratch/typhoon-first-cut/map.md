@@ -11,12 +11,19 @@
 - 会话应参考：`/grilling`、`/domain-modeling`、`/research`；必要时 `/prototype`
 - 已定方向（建图时钉死，细节在对应票里展开）：
   - 不追求圆形风场；1D 强度剖面 + 路径宽度裁剪
-  - 抗风：自定义标签/数据表，覆盖大部分方块
+  - 抗风：hardness 分箱默认 + 标签例外表（详见第 05 票）；黑曜石/基岩免疫
   - 雨：台风区域驱动，不抢原版全局 `/weather`
-  - 命令生成进第一刀；自然随机生成不进
-  - 迎风面简化版进第一刀
-  - 风向可视化：粒子为主 + 轻量状态提示；不做雷达
+  - 命令生成进第一刀（`spawn`/`clear`/`list`；半宽按区块、过境默认半天）；自然随机生成不进
+  - 迎风面简化版进第一刀（轴对齐同列遮挡；地面不特判）
+  - 破坏扫描：玩家附近窗口 + 每 tick 预算；超额驱动渐裂；不够则清进度
+  - 风向可视化：粒子为主；信息面=聊天+Boss栏（名称/局部强度/路径进度）；不做雷达
+  - 强度剖面内置对称比例（眼 0.05L / 墙至 0.15L / 坡至 0.45L）；过眼风向自动反转
+  - 被风吹的掉落物可撞生物致伤（窄版）；独立碎片实体与碎片打建筑不做
+  - 玩家风力：挂局部强度；6=力学地狱；创造可飞/旁观关闭
+  - 风味灾害（门乱开等）不进第一刀
 - 默认只产出决策与路线，不在本图内直接实现玩法代码（除非某张票 Notes 另说）
+- **寻路状态：完成**（2026-08-12）；实现前无未决决策挡路
+- **规格：** [`spec.md`](spec.md)（Status: ready-for-agent）
 
 ## Decisions so far
 
@@ -26,18 +33,25 @@
 - [台风状态存哪、怎么 tick](issues/02-typhoon-state-storage.md) — 权威状态用服务端 `SavedData`（类比 `Raids`）+ `ServerTickEvents` 世界 tick；不推荐 Entity / 不作第一刀 Attachment 主方案。全文：`research/02-typhoon-state-storage.md`
 - [风力破坏如何呈现挖掘进度](issues/03-block-break-progress.md) — 不必假玩家；`ServerLevel.destroyBlockProgress` 播 0–9 裂纹（负 id 池）+ `destroyBlock` 掉落。全文：`research/03-block-break-progress.md`
 - [区域降雨且不抢全局天气](issues/04-regional-rain.md) — 不碰全局 `/weather`；服务端只同步台风几何/强度，客户端叠加雨粒子与音效；风眼 `strength=0`；湿润/作物逻辑不进第一刀。全文：`research/04-regional-rain.md`
+- [抗风标签如何覆盖大部分方块](issues/05-wind-resist-scheme.md) — hardness 分箱默认 + `typhoon:` 例外 tag；叶/玻璃=1…铁=5、钻石/下界合金块=6；黑曜石族与基岩等免疫；第一刀无单方块 override。ADR：`docs/adr/0001-wind-resist-default-plus-tag-exceptions.md`；事实：`research/05-wind-resist-scheme.md`
+- [第一刀生成命令长什么样](issues/06-spawn-command-surface.md) — `/typhoon spawn|clear|list`；路径=起终点；峰值默认6、半宽默认16区块、过境默认半天（速度反推）；风向默认同路径可覆盖。
+- [玩家受风体感阈值](issues/07-player-wind-feel.md) — 效果挂局部强度1–6；4禁冲刺、5跳偏、6力学地狱（风不直接扣血）；创造可飞/旁观关闭玩家风力。窄版「吹走的掉落物撞生物致伤」进第一刀，公式见第09票。
+- [破坏速率与扫描预算](issues/08-destruction-scan-budget.md) — 轴对齐同列迎风；玩家±32/±16窗+64–128判定/tick；超额驱动秒级渐裂；强度不够清进度；地面不特判（平地几乎不破）。
+- [被风吹的掉落物撞击伤害怎么算](issues/09-blown-drop-damage.md) — 过速才伤；底伤2×局部强度倍率(约0.5–2)；1秒同对冷却；生存玩家与生物吃护甲减免；创造可飞/旁观免疫；速度门槛见第10票。
+- [掉落物被风吹走的手感与速度](issues/10-blown-drop-motion.md) — 水平推+轻抬升；终端约3/8/14格秒(强度1/3/6)；伤害门槛≥5格秒；玩家窗内32–64个/tick施力；不改原版despawn。
+- [强度剖面沿路径的内置比例](issues/11-intensity-profile-shape.md) — 对称；风眼0.05L、眼墙至0.15L、斜坡至0.45L；过眼主风向自动反转（手动覆盖优先）。
+- [台风命名与展示放哪](issues/12-typhoon-name-display.md) — 聊天+Boss栏；标题为名称与局部/峰值；进度条=路径进度；无动作栏/HUD/雷达面板。
+- [风味灾害是否进第一刀](issues/13-flavor-hazards-scope.md) — 严格不做；第一刀停在破坏+吹人+掉落撞击+雨/粒子/命令/Boss栏；门乱开等风味解锁进 Out of scope。
 
 ## Not yet specified
 
-- 强度曲线的具体距离/宽度/峰值参数（等剖面模型与体感阈值更清楚后再拆票）
-- 台风命名与展示文案的最终形式（「海燕」类信息面板放哪）
-- 掉落物被风吹走的物理手感与速度曲线
-- 等级解锁的「风味」灾害（门乱开、屋顶等）是否进第一刀的后续增量，还是严格停在破坏+吹玩家
+（无。开票已清空；实现前无未决决策挡路 → **本图寻路完成**，可交 `/to-spec` 或实现。）
 
 ## Out of scope
 
 - 天气雷达与科技线
-- 飞行碎片伤害建筑/玩家
+- 独立飞行碎片实体；碎片再破坏建筑/玻璃（第一刀只用被风吹的掉落物撞生物致伤，见第07/09票）
+- 按等级解锁的风味灾害（门乱开、专属屋顶演出等）；第一刀不靠额外机制点缀
 - 灾后统计结算界面
 - 自然随机生成、复杂生命周期转向/突然消散
 - 真实旋转/圆形风场模拟
