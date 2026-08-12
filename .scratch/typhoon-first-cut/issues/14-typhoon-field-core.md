@@ -16,7 +16,7 @@
 
 ### 2026-08-12 实现子代理
 
-- **Commits:** `d7ab2aa`（接缝实现 + JUnit）；本提交含死字段清理与票状态更新
+- **Commits:** `d7ab2aa`（接缝实现 + JUnit）；`a79a810`（死字段清理 + 票状态 ready-for-human）
 - **测试:** `./gradlew test --tests com.namimono.typhoon.field.TyphoonFieldTest` 与全量 `./gradlew test` 均通过（7 tests）
 - **接缝:** `com.namimono.typhoon.field.TyphoonField` / `TyphoonSample`（纯逻辑，无 MC 依赖）
 - **审查（相对 `ce7a397`）:**
