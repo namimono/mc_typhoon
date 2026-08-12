@@ -11,7 +11,7 @@
 - 会话应参考：`/grilling`、`/domain-modeling`、`/research`；必要时 `/prototype`
 - 已定方向（建图时钉死，细节在对应票里展开）：
   - 不追求圆形风场；1D 强度剖面 + 路径宽度裁剪
-  - 抗风：自定义标签/数据表，覆盖大部分方块
+  - 抗风：hardness 分箱默认 + 标签例外表（详见第 05 票）；黑曜石/基岩免疫
   - 雨：台风区域驱动，不抢原版全局 `/weather`
   - 命令生成进第一刀；自然随机生成不进
   - 迎风面简化版进第一刀
@@ -26,6 +26,7 @@
 - [台风状态存哪、怎么 tick](issues/02-typhoon-state-storage.md) — 权威状态用服务端 `SavedData`（类比 `Raids`）+ `ServerTickEvents` 世界 tick；不推荐 Entity / 不作第一刀 Attachment 主方案。全文：`research/02-typhoon-state-storage.md`
 - [风力破坏如何呈现挖掘进度](issues/03-block-break-progress.md) — 不必假玩家；`ServerLevel.destroyBlockProgress` 播 0–9 裂纹（负 id 池）+ `destroyBlock` 掉落。全文：`research/03-block-break-progress.md`
 - [区域降雨且不抢全局天气](issues/04-regional-rain.md) — 不碰全局 `/weather`；服务端只同步台风几何/强度，客户端叠加雨粒子与音效；风眼 `strength=0`；湿润/作物逻辑不进第一刀。全文：`research/04-regional-rain.md`
+- [抗风标签如何覆盖大部分方块](issues/05-wind-resist-scheme.md) — hardness 分箱默认 + `typhoon:` 例外 tag；叶/玻璃=1…铁=5、钻石/下界合金块=6；黑曜石族与基岩等免疫；第一刀无单方块 override。ADR：`docs/adr/0001-wind-resist-default-plus-tag-exceptions.md`；事实：`research/05-wind-resist-scheme.md`
 
 ## Not yet specified
 
