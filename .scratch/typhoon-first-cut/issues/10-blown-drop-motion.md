@@ -1,7 +1,7 @@
 # 掉落物被风吹走的手感与速度
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 07, 09
 
 ## Question
