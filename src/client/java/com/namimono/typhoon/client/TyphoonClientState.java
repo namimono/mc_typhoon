@@ -32,8 +32,4 @@ public final class TyphoonClientState {
 	public static Optional<TyphoonSample> sampleAt(double x, double z) {
 		return tracked().map(record -> record.field().sample(x, z));
 	}
-
-	public static boolean hasStorms() {
-		return !fields.isEmpty();
-	}
 }

@@ -24,18 +24,17 @@ public final class TyphoonSync {
 	}
 
 	public static void tick(ServerLevel level, TyphoonSavedData data) {
-		TyphoonSyncPayload payload = data == null
-				? TyphoonSyncPayload.empty()
-				: TyphoonSyncPayload.of(data.snapshots());
+		TyphoonSyncPayload payload = payloadFor(data);
 		for (ServerPlayer player : level.players()) {
 			ServerPlayNetworking.send(player, payload);
 		}
 	}
 
 	public static void sendTo(ServerPlayer player, TyphoonSavedData data) {
-		TyphoonSyncPayload payload = data == null
-				? TyphoonSyncPayload.empty()
-				: TyphoonSyncPayload.of(data.snapshots());
-		ServerPlayNetworking.send(player, payload);
+		ServerPlayNetworking.send(player, payloadFor(data));
+	}
+
+	private static TyphoonSyncPayload payloadFor(TyphoonSavedData data) {
+		return data == null ? TyphoonSyncPayload.empty() : TyphoonSyncPayload.of(data.snapshots());
 	}
 }
