@@ -1,7 +1,7 @@
 # 台风命名与展示放哪
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 06
 
 ## Question
