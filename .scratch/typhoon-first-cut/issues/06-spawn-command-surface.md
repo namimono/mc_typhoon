@@ -1,7 +1,7 @@
 # 第一刀生成命令长什么样
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 02
 
 ## Question
