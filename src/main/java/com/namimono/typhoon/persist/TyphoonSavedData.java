@@ -5,6 +5,7 @@ import com.namimono.typhoon.field.TyphoonRecord;
 import com.namimono.typhoon.field.TyphoonSnapshot;
 import com.namimono.typhoon.field.TyphoonSpawnRequest;
 import com.namimono.typhoon.field.TyphoonSummary;
+import com.namimono.typhoon.field.BlownDropImpactCooldown;
 import com.namimono.typhoon.field.WindBreakEngine;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,9 @@ public final class TyphoonSavedData extends SavedData {
 	private TyphoonFields fields = new TyphoonFields();
 	/** 会话内裂纹状态；不写入存档。 */
 	private final WindBreakEngine windBreakEngine = new WindBreakEngine();
+	/** 会话内掉落物撞击冷却与施力轮转光标；不写入存档。 */
+	private final BlownDropImpactCooldown blownDropImpactCooldown = new BlownDropImpactCooldown();
+	private int blownDropCursor;
 
 	public static SavedData.Factory<TyphoonSavedData> factory() {
 		return new SavedData.Factory<>(TyphoonSavedData::new, TyphoonSavedData::load, null);
@@ -82,5 +86,17 @@ public final class TyphoonSavedData extends SavedData {
 
 	public WindBreakEngine windBreakEngine() {
 		return windBreakEngine;
+	}
+
+	public BlownDropImpactCooldown blownDropImpactCooldown() {
+		return blownDropImpactCooldown;
+	}
+
+	public int blownDropCursor() {
+		return blownDropCursor;
+	}
+
+	public void setBlownDropCursor(int blownDropCursor) {
+		this.blownDropCursor = blownDropCursor;
 	}
 }

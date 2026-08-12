@@ -2,6 +2,7 @@ package com.namimono.typhoon;
 
 import com.namimono.typhoon.breakage.WindBreakApplier;
 import com.namimono.typhoon.command.TyphoonCommands;
+import com.namimono.typhoon.drop.BlownDropApplier;
 import com.namimono.typhoon.network.TyphoonSync;
 import com.namimono.typhoon.persist.TyphoonSavedData;
 import com.namimono.typhoon.player.PlayerWindApplier;
@@ -29,6 +30,7 @@ public class Typhoon implements ModInitializer {
 			data.tick();
 			PlayerWindApplier.tick(level, data);
 			WindBreakApplier.tick(level, data);
+			BlownDropApplier.tick(level, data);
 			TyphoonBossBars.tick(level, data);
 			TyphoonSync.tick(level, data);
 		});
