@@ -1,7 +1,7 @@
 # 抗风标签如何覆盖大部分方块
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01
 
 ## Question
