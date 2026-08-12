@@ -16,7 +16,7 @@
 
 ### 2026-08-12 实现子代理
 
-- **Commits:** `1f800d6`（掉落物运动/撞击接缝 + 适配层 + 单测）；`672c39e`（抬升冲量微调）；本提交（票状态 ready-for-human + 轮转光标修正）
+- **Commits:** `1f800d6`（掉落物运动/撞击接缝 + 适配层 + 单测）；`672c39e`（抬升冲量微调）；`54bf66a`（票状态 ready-for-human + 轮转光标修正）
 - **测试:** `./gradlew test` 全绿（60 tests；新增 BlownDropMotion 6 + BlownDropImpact 5）
 - **接缝:**
   - 领域：`BlownDropMotion` / `BlownDropMotionEffect`（终端 1→3、3→8、6→14；轻度抬升；~15 tick 指数逼近；预算 48、玩家窗 ±32/±16）；`BlownDropImpact` / `BlownDropImpactCooldown`（≥5 格/秒门槛；伤害 2×clamp(强度/3,0.5–2)；同对 20 tick；创造可飞/旁观免疫）
