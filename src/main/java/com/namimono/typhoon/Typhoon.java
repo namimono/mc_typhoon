@@ -2,6 +2,7 @@ package com.namimono.typhoon;
 
 import com.namimono.typhoon.command.TyphoonCommands;
 import com.namimono.typhoon.persist.TyphoonSavedData;
+import com.namimono.typhoon.player.PlayerWindApplier;
 import com.namimono.typhoon.ui.TyphoonBossBars;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -23,6 +24,7 @@ public class Typhoon implements ModInitializer {
 				return;
 			}
 			data.tick();
+			PlayerWindApplier.tick(level, data);
 			TyphoonBossBars.tick(level, data);
 		});
 		LOGGER.info("Typhoon mod initialized");
