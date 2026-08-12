@@ -24,6 +24,7 @@
 - 默认只产出决策与路线，不在本图内直接实现玩法代码（除非某张票 Notes 另说）
 - **寻路状态：完成**（2026-08-12）；实现前无未决决策挡路
 - **规格：** [`spec.md`](spec.md)（Status: ready-for-agent）
+- **实现票：** 14–19（`ready-for-agent`；前沿为 14，其后见各票 Blocked by）
 
 ## Decisions so far
 
