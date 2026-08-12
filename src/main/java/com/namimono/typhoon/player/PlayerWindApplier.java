@@ -3,8 +3,11 @@ package com.namimono.typhoon.player;
 import com.namimono.typhoon.Typhoon;
 import com.namimono.typhoon.field.PlayerWindEffect;
 import com.namimono.typhoon.field.PlayerWindFeel;
+import com.namimono.typhoon.field.TyphoonField;
+import com.namimono.typhoon.field.TyphoonRecord;
 import com.namimono.typhoon.field.TyphoonSample;
 import com.namimono.typhoon.persist.TyphoonSavedData;
+import java.util.Optional;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,13 +29,14 @@ public final class PlayerWindApplier {
 	}
 
 	public static void tick(ServerLevel level, TyphoonSavedData data) {
-		if (data.tracked().isEmpty()) {
+		Optional<TyphoonRecord> tracked = data.tracked();
+		if (tracked.isEmpty()) {
 			for (ServerPlayer player : level.players()) {
 				clearSpeedModifier(player);
 			}
 			return;
 		}
-		var field = data.tracked().get().field();
+		TyphoonField field = tracked.orElseThrow().field();
 		for (ServerPlayer player : level.players()) {
 			apply(player, field.sample(player.getX(), player.getZ()));
 		}
