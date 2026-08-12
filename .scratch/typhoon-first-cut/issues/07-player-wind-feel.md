@@ -1,7 +1,7 @@
 # 玩家受风体感阈值
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01
 
 ## Question
