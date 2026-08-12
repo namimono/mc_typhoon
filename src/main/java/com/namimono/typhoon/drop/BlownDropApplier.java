@@ -48,8 +48,9 @@ public final class BlownDropApplier {
 		int size = candidates.size();
 		int cursor = data.blownDropCursor();
 		int applied = 0;
-		for (int i = 0; i < size && applied < budget; i++) {
-			ItemEntity item = candidates.get(Math.floorMod(cursor + i, size));
+		int examined = 0;
+		for (; examined < size && applied < budget; examined++) {
+			ItemEntity item = candidates.get(Math.floorMod(cursor + examined, size));
 			BlownDropMotionEffect motion = BlownDropMotion.resolve(field.sample(item.getX(), item.getZ()));
 			if (!motion.active()) {
 				continue;
@@ -57,7 +58,7 @@ public final class BlownDropApplier {
 			applyForce(item, motion);
 			applied++;
 		}
-		data.setBlownDropCursor(cursor + Math.max(applied, 1));
+		data.setBlownDropCursor(cursor + Math.max(examined, 1));
 
 		// 撞击与施力预算解耦：附近够速掉落物均可结算
 		for (ItemEntity item : candidates) {
