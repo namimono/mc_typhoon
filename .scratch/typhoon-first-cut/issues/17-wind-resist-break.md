@@ -17,7 +17,7 @@
 
 ### 2026-08-12 实现子代理
 
-- **Commits:** `f180659`（抗风/迎风/破坏引擎 + 适配层 + tag + 单测）；本提交（票状态 ready-for-human）
+- **Commits:** `f180659`（抗风/迎风/破坏引擎 + 适配层 + tag + 单测）；`f358539`（票状态 ready-for-human）
 - **测试:** `./gradlew test` 全绿（45 tests：Field 7 + Fields 7 + PlayerWind 9 + Nbt 1 + CommandsFeedback 1 + WindResistance 6 + WindwardFace 6 + WindBreakEngine 8）
 - **接缝:**
   - 领域：`WindResistance` / `WindBlockFacts`（例外 tag → hardness 分箱；免疫/不参与）；`WindwardFace` + `SolidProbe`（主轴同列遮挡）；`WindBreakEngine` / `WindBreakWorld` / `WindBreakAction`（玩家窗 ±32/±16、预算 96、并发 24、负 id 池、超额渐裂与清进度）
