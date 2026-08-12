@@ -1,7 +1,7 @@
 # 被风吹的掉落物撞击伤害怎么算
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 07
 
 ## Question
