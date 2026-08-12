@@ -102,8 +102,52 @@ public final class TyphoonField {
 		elapsedTicks = (int) Math.min(next, durationTicks);
 	}
 
+	/** 存档加载后恢复已推进时长（夹在 [0, durationTicks]）。 */
+	public void restoreElapsedTicks(int elapsedTicks) {
+		if (elapsedTicks < 0) {
+			throw new IllegalArgumentException("elapsedTicks must be non-negative");
+		}
+		this.elapsedTicks = Math.min(elapsedTicks, durationTicks);
+	}
+
 	public double pathProgress() {
 		return (double) elapsedTicks / (double) durationTicks;
+	}
+
+	public boolean finished() {
+		return elapsedTicks >= durationTicks;
+	}
+
+	public int peakGrade() {
+		return peakGrade;
+	}
+
+	public double influenceHalfWidth() {
+		return influenceHalfWidth;
+	}
+
+	public int durationTicks() {
+		return durationTicks;
+	}
+
+	public int elapsedTicks() {
+		return elapsedTicks;
+	}
+
+	public Double windOverrideX() {
+		return overrideWindX;
+	}
+
+	public Double windOverrideZ() {
+		return overrideWindZ;
+	}
+
+	public double startX() {
+		return startX;
+	}
+
+	public double startZ() {
+		return startZ;
 	}
 
 	public TyphoonSample sample(double x, double z) {
