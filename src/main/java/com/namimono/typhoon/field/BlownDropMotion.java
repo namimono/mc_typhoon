@@ -58,21 +58,22 @@ public final class BlownDropMotion {
 
 	/**
 	 * 竖直抬升目标速度（格/秒）：强度 1 很弱，3 明显，6 可腾空掠过。
+	 * 适配层每 tick 叠加该冲量（÷20），重力仍在。
 	 */
 	public static double liftSpeedBlocksPerSecond(double localIntensity) {
 		if (localIntensity <= 0.0) {
 			return 0.0;
 		}
 		if (localIntensity <= 1.0) {
-			return 0.4 * localIntensity;
+			return 0.5 * localIntensity;
 		}
 		if (localIntensity <= 3.0) {
-			return lerp(0.4, 1.5, (localIntensity - 1.0) / 2.0);
+			return lerp(0.5, 1.2, (localIntensity - 1.0) / 2.0);
 		}
 		if (localIntensity <= 6.0) {
-			return lerp(1.5, 3.5, (localIntensity - 3.0) / 3.0);
+			return lerp(1.2, 2.0, (localIntensity - 3.0) / 3.0);
 		}
-		return 3.5;
+		return 2.0;
 	}
 
 	/**
@@ -91,12 +92,12 @@ public final class BlownDropMotion {
 		};
 	}
 
-	/** 本 tick 应叠加的竖直抬升冲量（格/秒）；非永久悬浮。 */
+	/** 本 tick 应叠加的竖直抬升冲量（格/秒）；非永久悬浮，重力仍在。 */
 	public static double liftImpulseBlocksPerSecond(BlownDropMotionEffect effect) {
 		if (!effect.active()) {
 			return 0.0;
 		}
-		return effect.targetLiftSpeed() * BLEND_PER_TICK;
+		return effect.targetLiftSpeed();
 	}
 
 	/** 格/秒 → 格/tick（Minecraft 运动单位）。 */
