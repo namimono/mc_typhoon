@@ -11,9 +11,9 @@
 - 会话应参考：`/grilling`、`/domain-modeling`、`/research`；必要时 `/prototype`
 - 已定方向（建图时钉死，细节在对应票里展开）：
   - 不追求圆形风场；1D 强度剖面 + 路径宽度裁剪
-  - 抗风：自定义标签/数据表，覆盖大部分方块
+  - 抗风：hardness 分箱默认 + 标签例外表（详见第 05 票）；黑曜石/基岩免疫
   - 雨：台风区域驱动，不抢原版全局 `/weather`
-  - 命令生成进第一刀；自然随机生成不进
+  - 命令生成进第一刀（`spawn`/`clear`/`list`；半宽按区块、过境默认半天）；自然随机生成不进
   - 迎风面简化版进第一刀
   - 风向可视化：粒子为主 + 轻量状态提示；不做雷达
 - 默认只产出决策与路线，不在本图内直接实现玩法代码（除非某张票 Notes 另说）
@@ -26,11 +26,13 @@
 - [台风状态存哪、怎么 tick](issues/02-typhoon-state-storage.md) — 权威状态用服务端 `SavedData`（类比 `Raids`）+ `ServerTickEvents` 世界 tick；不推荐 Entity / 不作第一刀 Attachment 主方案。全文：`research/02-typhoon-state-storage.md`
 - [风力破坏如何呈现挖掘进度](issues/03-block-break-progress.md) — 不必假玩家；`ServerLevel.destroyBlockProgress` 播 0–9 裂纹（负 id 池）+ `destroyBlock` 掉落。全文：`research/03-block-break-progress.md`
 - [区域降雨且不抢全局天气](issues/04-regional-rain.md) — 不碰全局 `/weather`；服务端只同步台风几何/强度，客户端叠加雨粒子与音效；风眼 `strength=0`；湿润/作物逻辑不进第一刀。全文：`research/04-regional-rain.md`
+- [抗风标签如何覆盖大部分方块](issues/05-wind-resist-scheme.md) — hardness 分箱默认 + `typhoon:` 例外 tag；叶/玻璃=1…铁=5、钻石/下界合金块=6；黑曜石族与基岩等免疫；第一刀无单方块 override。ADR：`docs/adr/0001-wind-resist-default-plus-tag-exceptions.md`；事实：`research/05-wind-resist-scheme.md`
+- [第一刀生成命令长什么样](issues/06-spawn-command-surface.md) — `/typhoon spawn|clear|list`；路径=起终点；峰值默认6、半宽默认16区块、过境默认半天（速度反推）；风向默认同路径可覆盖。
 
 ## Not yet specified
 
-- 强度曲线的具体距离/宽度/峰值参数（等剖面模型与体感阈值更清楚后再拆票）
-- 台风命名与展示文案的最终形式（「海燕」类信息面板放哪）
+- 强度剖面沿路径的内置比例（升段/风眼宽/降段各占多少；命令默认宽度与峰值已钉，曲线形状未钉）
+- 台风命名与展示文案的最终形式（「海燕」类信息面板放哪；命令已有可选 name）
 - 掉落物被风吹走的物理手感与速度曲线
 - 等级解锁的「风味」灾害（门乱开、屋顶等）是否进第一刀的后续增量，还是严格停在破坏+吹玩家
 
