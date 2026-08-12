@@ -2,6 +2,7 @@ package com.namimono.typhoon;
 
 import com.namimono.typhoon.breakage.WindBreakApplier;
 import com.namimono.typhoon.command.TyphoonCommands;
+import com.namimono.typhoon.network.TyphoonSync;
 import com.namimono.typhoon.persist.TyphoonSavedData;
 import com.namimono.typhoon.player.PlayerWindApplier;
 import com.namimono.typhoon.ui.TyphoonBossBars;
@@ -18,6 +19,7 @@ public class Typhoon implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		TyphoonSync.register();
 		CommandRegistrationCallback.EVENT.register(TyphoonCommands::register);
 		ServerTickEvents.END_WORLD_TICK.register(level -> {
 			TyphoonSavedData data = TyphoonSavedData.getIfPresent(level);
@@ -28,6 +30,7 @@ public class Typhoon implements ModInitializer {
 			PlayerWindApplier.tick(level, data);
 			WindBreakApplier.tick(level, data);
 			TyphoonBossBars.tick(level, data);
+			TyphoonSync.tick(level, data);
 		});
 		LOGGER.info("Typhoon mod initialized");
 	}

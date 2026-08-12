@@ -14,6 +14,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.namimono.typhoon.field.TyphoonRecord;
 import com.namimono.typhoon.field.TyphoonSpawnRequest;
 import com.namimono.typhoon.field.TyphoonSummary;
+import com.namimono.typhoon.network.TyphoonSync;
 import com.namimono.typhoon.persist.TyphoonSavedData;
 import com.namimono.typhoon.ui.TyphoonBossBars;
 import java.util.List;
@@ -121,6 +122,7 @@ public final class TyphoonCommands {
 				windZ);
 
 		TyphoonRecord record = TyphoonSavedData.get(level).spawn(request);
+		TyphoonSync.tick(level, TyphoonSavedData.get(level));
 		source.sendSuccess(
 				() -> Component.literal(formatSpawnFeedback(record, from, to)),
 				true);
@@ -144,8 +146,10 @@ public final class TyphoonCommands {
 
 	private static int clear(CommandContext<CommandSourceStack> ctx) {
 		ServerLevel level = ctx.getSource().getLevel();
-		TyphoonSavedData.get(level).clear();
+		TyphoonSavedData data = TyphoonSavedData.get(level);
+		data.clear();
 		TyphoonBossBars.clear(level);
+		TyphoonSync.tick(level, data);
 		ctx.getSource().sendSuccess(() -> Component.literal("已清除当前维度全部台风"), true);
 		return Command.SINGLE_SUCCESS;
 	}

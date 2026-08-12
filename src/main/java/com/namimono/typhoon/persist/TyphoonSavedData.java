@@ -2,6 +2,7 @@ package com.namimono.typhoon.persist;
 
 import com.namimono.typhoon.field.TyphoonFields;
 import com.namimono.typhoon.field.TyphoonRecord;
+import com.namimono.typhoon.field.TyphoonSnapshot;
 import com.namimono.typhoon.field.TyphoonSpawnRequest;
 import com.namimono.typhoon.field.TyphoonSummary;
 import com.namimono.typhoon.field.WindBreakEngine;
@@ -73,6 +74,10 @@ public final class TyphoonSavedData extends SavedData {
 
 	public Optional<TyphoonRecord> tracked() {
 		return fields.tracked();
+	}
+
+	public List<TyphoonSnapshot> snapshots() {
+		return fields.snapshots();
 	}
 
 	public WindBreakEngine windBreakEngine() {
