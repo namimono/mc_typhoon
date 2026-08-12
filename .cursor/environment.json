@@ -1,0 +1,4 @@
+{
+  "name": "Typhoon (Fabric mod)",
+  "install": "./gradlew --no-daemon build"
+}
