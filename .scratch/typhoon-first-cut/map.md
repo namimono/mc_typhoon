@@ -22,6 +22,11 @@
 
 <!-- 关闭的票在此索引：一句话结论 + 链接到票 -->
 
+- [第一刀台风领域用语](issues/01-domain-vocabulary.md) — 用语钉在根目录 `CONTEXT.md`：台风/中心/路径/强度剖面/风眼/影响宽度·带/主风向；局部强度·峰值等级·抗风等级分用；迎风面·背风·台风雨·风力破坏。
+- [台风状态存哪、怎么 tick](issues/02-typhoon-state-storage.md) — 权威状态用服务端 `SavedData`（类比 `Raids`）+ `ServerTickEvents` 世界 tick；不推荐 Entity / 不作第一刀 Attachment 主方案。全文：`research/02-typhoon-state-storage.md`
+- [风力破坏如何呈现挖掘进度](issues/03-block-break-progress.md) — 不必假玩家；`ServerLevel.destroyBlockProgress` 播 0–9 裂纹（负 id 池）+ `destroyBlock` 掉落。全文：`research/03-block-break-progress.md`
+- [区域降雨且不抢全局天气](issues/04-regional-rain.md) — 不碰全局 `/weather`；服务端只同步台风几何/强度，客户端叠加雨粒子与音效；风眼 `strength=0`；湿润/作物逻辑不进第一刀。全文：`research/04-regional-rain.md`
+
 ## Not yet specified
 
 - 强度曲线的具体距离/宽度/峰值参数（等剖面模型与体感阈值更清楚后再拆票）
