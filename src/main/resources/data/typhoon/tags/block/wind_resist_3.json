@@ -1,0 +1,26 @@
+{
+  "values": [
+    "minecraft:stone",
+    "minecraft:andesite",
+    "minecraft:diorite",
+    "minecraft:granite",
+    "minecraft:tuff",
+    "#minecraft:stone_bricks",
+    {
+      "id": "#c:cobblestones/normal",
+      "required": false
+    },
+    {
+      "id": "#c:cobblestones/mossy",
+      "required": false
+    },
+    "minecraft:cobblestone",
+    "minecraft:mossy_cobblestone",
+    "minecraft:smooth_stone",
+    "minecraft:stone_stairs",
+    "minecraft:cobblestone_stairs",
+    "minecraft:stone_slab",
+    "minecraft:cobblestone_slab",
+    "minecraft:smooth_stone_slab"
+  ]
+}

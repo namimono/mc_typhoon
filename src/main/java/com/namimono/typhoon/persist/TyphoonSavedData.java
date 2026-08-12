@@ -4,6 +4,7 @@ import com.namimono.typhoon.field.TyphoonFields;
 import com.namimono.typhoon.field.TyphoonRecord;
 import com.namimono.typhoon.field.TyphoonSpawnRequest;
 import com.namimono.typhoon.field.TyphoonSummary;
+import com.namimono.typhoon.field.WindBreakEngine;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.HolderLookup;
@@ -19,6 +20,8 @@ public final class TyphoonSavedData extends SavedData {
 	public static final String ID = "typhoon_storms";
 
 	private TyphoonFields fields = new TyphoonFields();
+	/** 会话内裂纹状态；不写入存档。 */
+	private final WindBreakEngine windBreakEngine = new WindBreakEngine();
 
 	public static SavedData.Factory<TyphoonSavedData> factory() {
 		return new SavedData.Factory<>(TyphoonSavedData::new, TyphoonSavedData::load, null);
@@ -70,5 +73,9 @@ public final class TyphoonSavedData extends SavedData {
 
 	public Optional<TyphoonRecord> tracked() {
 		return fields.tracked();
+	}
+
+	public WindBreakEngine windBreakEngine() {
+		return windBreakEngine;
 	}
 }
