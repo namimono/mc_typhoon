@@ -1,7 +1,7 @@
 # 破坏速率与扫描预算
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 03
 
 ## Question
