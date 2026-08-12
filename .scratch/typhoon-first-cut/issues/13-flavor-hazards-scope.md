@@ -1,7 +1,7 @@
 # 风味灾害是否进第一刀
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01
 
 ## Question
