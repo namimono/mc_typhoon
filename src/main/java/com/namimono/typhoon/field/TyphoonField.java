@@ -12,8 +12,6 @@ public final class TyphoonField {
 
 	private final double startX;
 	private final double startZ;
-	private final double endX;
-	private final double endZ;
 	private final double pathLength;
 	private final double dirX;
 	private final double dirZ;
@@ -46,8 +44,6 @@ public final class TyphoonField {
 		}
 		this.startX = startX;
 		this.startZ = startZ;
-		this.endX = endX;
-		this.endZ = endZ;
 		double dx = endX - startX;
 		double dz = endZ - startZ;
 		this.pathLength = Math.hypot(dx, dz);
@@ -113,8 +109,6 @@ public final class TyphoonField {
 	public TyphoonSample sample(double x, double z) {
 		double progress = pathProgress();
 		double centerAlong = progress * pathLength;
-		double centerX = startX + dirX * centerAlong;
-		double centerZ = startZ + dirZ * centerAlong;
 
 		double fromStartX = x - startX;
 		double fromStartZ = z - startZ;
