@@ -2,7 +2,7 @@
 
 **What to build:** 台风场接缝能按路径与时长推进台风中心，并对任意坐标给出是否在影响带、局部强度、主风向（含过眼自动反转与手动覆盖优先）、路径进度；强度剖面按已定对称比例（风眼 / 眼墙 / 斜坡）。用测试证明风眼为 0、带外无影响、过眼风向翻转等行为，不依赖完整游戏客户端。
 
-**Blocked by:** None — can start immediately
+**Blocked by:** None
 
 **Status:** ready-for-agent
 
