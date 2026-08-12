@@ -15,7 +15,7 @@
 
 ### 2026-08-12 实现子代理
 
-- **Commits:** `e157b6d`（台风雨接缝 + S2C 同步 + 客户端雨/风向粒子）；（本提交：票状态 ready-for-human + 自审小清理）
+- **Commits:** `e157b6d`（台风雨接缝 + S2C 同步 + 客户端雨/风向粒子）；`223f68872f97211a94c1f0d7bc9b58930e853e24`（票状态 ready-for-human + 自审小清理）
 - **测试:** `./gradlew test` 全绿（49 tests：含 TyphoonRainFeel 4；其余既有场/风力/抗风/破坏/NBT/命令反馈）
 - **接缝:**
   - 领域：`TyphoonRainFeel` / `TyphoonRainEffect`（局部强度>0 下雨，雨强=强度/6；风眼/带外停雨；风向取自采样含过眼反转与覆盖）
