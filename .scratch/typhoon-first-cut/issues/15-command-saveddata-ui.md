@@ -16,7 +16,7 @@
 
 ### 2026-08-12 实现子代理
 
-- **Commits:** `61001b7`（实现）；本提交更新票状态
+- **Commits:** `61001b7`（命令/SavedData/Boss栏 + 单测）；`c9a5c1b`（票状态 ready-for-human）
 - **测试:** `./gradlew test` 全绿（16 tests：TyphoonField 7 + TyphoonFields 7 + Nbt 1 + CommandsFeedback 1）
 - **接缝:**
   - 领域：`TyphoonFields` / `TyphoonSpawnRequest` / `TyphoonRecord` / `TyphoonDisplay`（复用票14 `TyphoonField`）
