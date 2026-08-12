@@ -1,7 +1,7 @@
 # 强度剖面沿路径的内置比例
 
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 01, 06
 
 ## Question
